@@ -38,7 +38,7 @@ padding-top:10px;
 }
 
 .container #orderDetails button{
- width:100% !important;
+ width:400px !important;
 }
 
 
@@ -49,10 +49,13 @@ padding-top:10px;
  border-bottom-left-radius:10px;
  border-bottom-right-radius:10px;
  box-shadow:0px 0px 16px 0px rgba(84,84,84,0.15) inset;
- padding-top:25px;
+  padding-left:10px;
+ padding-top:26px;
  padding-bottom:25px;
  transform:translatex(0px) translatey(0px);
  text-align:left;
+ position:relative;
+ top:0px;
 }
 
 /* Define gradient for the loading state */
