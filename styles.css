@@ -26,6 +26,10 @@
  height:100% !important;
 }
 
+#barcode-result{
+ display:none;
+}
+
 
 body {
     font-family: Arial, sans-serif;
