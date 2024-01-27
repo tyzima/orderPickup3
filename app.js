@@ -1,5 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', function() {
+    initializeBarcodeScanner();
+});
+
+function initializeBarcodeScanner() {
     Quagga.init({
         inputStream: {
             name: "Live",
@@ -7,7 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
             target: document.querySelector('#barcode-scanner')
         },
         decoder: {
-            readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+            readers: [
+                "code_128_reader",
+                "ean_reader",
+                "ean_8_reader",
+                "code_39_reader",
+                "code_39_vin_reader",
+                "codabar_reader",
+                "upc_reader",
+                "upc_e_reader",
+                "i2of5_reader"
+            ]
         }
     }, function(err) {
         if (err) {
@@ -18,11 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     Quagga.onDetected(function(data) {
+        Quagga.stop();  // Stop scanning after a barcode is detected
         let scannedBarcode = data.codeResult.code;
         document.getElementById('scanned-barcode').textContent = scannedBarcode;
         lookupOrder(scannedBarcode);
     });
-});
+}
 
 function lookupOrder(orderNumber) {
     fetch('/.netlify/functions/lookupOrder', {
@@ -56,6 +71,7 @@ function updateOrderStage(orderNumber) {
     .then(response => response.json())
     .then(data => {
         displayOrderDetails({ ...data.order, stage: 'Picked Up' });
+        initializeBarcodeScanner();  // Restart scanning after updating order status
     });
 }
 
