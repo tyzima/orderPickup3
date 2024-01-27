@@ -52,54 +52,6 @@ function lookupOrder(orderNumber) {
         if (data.orderNumber && data.orderNumber !== 'undefined') {
             // Stop scanning only if a valid record is returned
             Quagga.stop();
-
-    document.querySelector('#barcode-scanner').innerHTML = `<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 576">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: none;
-      }
-
-      .cls-1, .cls-2 {
-        stroke-width: 0px;
-      }
-
-      .cls-2 {
-        fill: #e0e0e0;
-      }
-    </style>
-  </defs>
-  <g>
-    <g>
-      <rect class="cls-2" x="329.26" y="195.03" width="14.3" height="55.85"/>
-      <rect class="cls-2" x="286.35" y="195.03" width="28.61" height="55.85"/>
-      <rect class="cls-2" x="243.44" y="195.03" width="14.3" height="55.85"/>
-      <rect class="cls-2" x="200.53" y="195.03" width="28.61" height="55.85"/>
-      <path class="cls-2" d="M429.38,173.58v50.06h14.3v-50.06c-.02-19.74-16.02-35.73-35.76-35.76h-50.06v14.3h50.06c11.84.02,21.44,9.61,21.45,21.45Z"/>
-      <rect class="cls-2" x="357.86" y="325.12" width="28.61" height="55.85"/>
-      <rect class="cls-2" x="357.86" y="195.03" width="28.61" height="55.85"/>
-      <rect class="cls-2" x="243.44" y="325.12" width="14.3" height="55.85"/>
-      <rect class="cls-2" x="286.35" y="325.12" width="28.61" height="55.85"/>
-      <rect class="cls-2" x="329.26" y="325.12" width="14.3" height="55.85"/>
-      <path class="cls-2" d="M157.63,173.58c.02-11.84,9.61-21.44,21.45-21.45h50.06v-14.3h-50.06c-19.74.02-35.73,16.02-35.76,35.76v50.06h14.3v-50.06Z"/>
-      <path class="cls-2" d="M429.38,402.42c-.02,11.84-9.61,21.44-21.45,21.45h-50.06v14.3h50.06c19.74-.02,35.73-16.02,35.76-35.76v-50.06h-14.3v50.06Z"/>
-      <rect class="cls-2" x="200.53" y="325.12" width="28.61" height="55.85"/>
-      <path class="cls-2" d="M157.63,402.42v-50.06h-14.3v50.06c.02,19.74,16.02,35.73,35.76,35.76h50.06v-14.3h-50.06c-11.84-.02-21.44-9.61-21.45-21.45Z"/>
-    </g>
-    <g>
-      <path class="cls-2" d="M119.14,301.6v-3.63h11.28v1.32l.81.81h19.02l.64-.64v-3.8l-.43-.43h-26.37l-4.79-4.79v-7.91l5.43-5.43h32.26l5,5v3.63h-11.28v-1.41l-.81-.81h-18.67l-.64.64v3.68l.43.43h26.37l4.79,4.79v8.12l-5.43,5.43h-32.61l-5-5Z"/>
-      <path class="cls-2" d="M169.23,300.31v-23.2h11.28v19.87l2.52,2.52h15.43l2.52-2.52v-19.87h11.28v23.2l-6.28,6.28h-30.47l-6.28-6.28Z"/>
-      <path class="cls-2" d="M219.52,300.31v-16.92l6.28-6.28h31.97l6.28,6.28v5.3h-11.28v-2.65l-2.09-2.09h-17.35l-2.52,2.52v10.77l2.52,2.52h17.35l2.09-2.09v-2.86h11.28v5.51l-6.28,6.28h-31.97l-6.28-6.28Z"/>
-      <path class="cls-2" d="M270.24,300.31v-16.92l6.28-6.28h31.96l6.28,6.28v5.3h-11.28v-2.65l-2.09-2.09h-17.35l-2.52,2.52v10.77l2.52,2.52h17.35l2.09-2.09v-2.86h11.28v5.51l-6.28,6.28h-31.96l-6.28-6.28Z"/>
-      <path class="cls-2" d="M321.82,277.11h36.28v6.41h-25v5h22.61v6.37h-22.61v5.3h25.08v6.41h-36.37v-29.49Z"/>
-      <path class="cls-2" d="M364.38,301.6v-3.63h11.28v1.32l.81.81h19.02l.64-.64v-3.8l-.43-.43h-26.37l-4.79-4.79v-7.91l5.43-5.43h32.26l5,5v3.63h-11.28v-1.41l-.81-.81h-18.68l-.64.64v3.68l.43.43h26.37l4.79,4.79v8.12l-5.43,5.43h-32.61l-5-5Z"/>
-      <path class="cls-2" d="M413.82,301.6v-3.63h11.28v1.32l.81.81h19.02l.64-.64v-3.8l-.43-.43h-26.37l-4.79-4.79v-7.91l5.43-5.43h32.26l5,5v3.63h-11.28v-1.41l-.81-.81h-18.68l-.64.64v3.68l.43.43h26.37l4.79,4.79v8.12l-5.43,5.43h-32.61l-5-5Z"/>
-    </g>
-  </g>
-  <rect class="cls-1" width="576" height="576"/>
-</svg>`;
-        
             
     // Remove loading class and add success class on successful scan
     var svgElement = document.querySelector('#Layer_1');
@@ -153,25 +105,28 @@ function updateOrderStage(orderNumber) {
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
-     .then(data => {
-        // Display success message
-        const button = document.querySelector('.OrderDetailsbutton');
+    .then(data => {
+    // Hide order details
+    const detailsDiv = document.getElementById('orderDetails');
+    if (detailsDiv) {
+        detailsDiv.innerHTML = ''; // Clear the content
+        detailsDiv.style.display = 'none'; // Hide the div
+    }
+
+    // Update button text to 'Success' and hide after a delay
+    const button = document.querySelector('.OrderDetailsbutton');
+    if (button) {
         button.textContent = 'Success';
-
-        // Hide order details and show barcode scanner again after a short delay
         setTimeout(() => {
-            const detailsDiv = document.getElementById('orderDetails');
-            detailsDiv.innerHTML = ''; // Clear order details
+            button.style.display = 'none'; // Hide the button
+            // Optionally, reset the button's text and display for the next order
+            button.textContent = 'Mark as Picked Up';
+            button.style.display = 'block';
+        }, 2000); // Delay in milliseconds
+    }
 
-            // Show the barcode scanner div and restart scanning
-            const scannerDiv = document.querySelector('#barcode-scanner');
-            scannerDiv.innerHTML = ''; // Clear any existing SVG
-            initializeBarcodeScanner();  // Restart scanning after updating order status
-
-            // Optionally, you can reset the button text or hide the button if needed
-        }, 2000); // Delay for button disappearance in milliseconds
- // 2000 ms delay for the button to disappear
-        
+    // Restart the barcode scanner if needed here
+})
         
     // Remove success class and add loading class to restart scanning
     var svgElement = document.querySelector('#Layer_1');
