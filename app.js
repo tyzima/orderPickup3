@@ -106,27 +106,7 @@ function updateOrderStage(orderNumber) {
     })
     .then(response => response.json())
     .then(data => {
-    // Hide order details
-    const detailsDiv = document.getElementById('orderDetails');
-    if (detailsDiv) {
-        detailsDiv.innerHTML = ''; // Clear the content
-        detailsDiv.style.display = 'none'; // Hide the div
-    }
-
-    // Update button text to 'Success' and hide after a delay
-    const button = document.querySelector('.OrderDetailsbutton');
-    if (button) {
-        button.textContent = 'Success';
-        setTimeout(() => {
-            button.style.display = 'none'; // Hide the button
-            // Optionally, reset the button's text and display for the next order
-            button.textContent = 'Mark as Picked Up';
-            button.style.display = 'block';
-        }, 2000); // Delay in milliseconds
-    }
-
-    // Restart the barcode scanner if needed here
-})
+        displayOrderDetails({ ...data.order, stage: 'Picked Up' });
         
     // Remove success class and add loading class to restart scanning
     var svgElement = document.querySelector('#Layer_1');
