@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeBarcodeScanner() {
+    const scannerDiv = document.querySelector('#barcode-scanner');
+    scannerDiv.innerHTML = ''; 
     Quagga.init({
         inputStream: {
             name: "Live",
