@@ -60,11 +60,11 @@ function lookupOrder(orderNumber) {
 function displayOrderDetails(order) {
     const detailsDiv = document.getElementById('orderDetails');
     detailsDiv.innerHTML = `
-        <p><strong>Customer Name:</strong> ${order.customerName}</p>
-        <p><strong>Customer Email:</strong> ${order.customerEmail}</p>
-        <p><strong>Order Number:</strong> ${order.orderNumber}</p>
-        <p><strong>Stage:</strong> ${order.stage}</p>
-        <button onclick="updateOrderStage('${order.orderNumber}')">Picked Up</button>
+        <p><strong>Customer:</strong> ${order.customerName}</p>
+        <p><strong>Email:</strong> ${order.customerEmail}</p>
+        <p><strong>Order #:</strong> ${order.orderNumber}</p>
+        <p><strong>Status:</strong> ${order.stage}</p>
+        <button onclick="updateOrderStage('${order.orderNumber}')">Mark as Picked Up</button>
     `;
 }
 
