@@ -21,7 +21,10 @@
   background-size: 200% 200%;
 }
 
-
+.container #barcode-scanner video{
+ width:100% !important;
+ height:100% !important;
+}
 
 
 body {
@@ -157,12 +160,21 @@ button:hover {
  float:none;
 }
 
+@media (min-width:577px){
+
+ /* Barcode scanner */
+ #barcode-scanner{
+  transform:translatex(0px) translatey(0px);
+ }
+ 
+}
+
 @media (max-width:576px){
 
  /* Barcode scanner */
  #barcode-scanner{
-  height:149px;
-     width: 100%;
+  height:243px;
+  width: 100%;
   transform:translatex(0px) translatey(0px);
   margin-bottom:1px;
  }
