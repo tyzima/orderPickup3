@@ -43,11 +43,14 @@
     </div>
 
 <div id="iosBanner" style="display: none;">
-    <img src="/Asset 1left.png" alt="Left Image" id="leftBannerImage">
-    <p>Add this app to your home screen for the best experience.</p>
-    <button onclick="closeBanner()">Close</button>
-    <img src="/Asset 1right.png" alt="Middle Image" id="middleBannerImage">
+    <div id="bannerContent">
+        <img src="/Asset 1left.png" alt="Left Image" id="leftBannerImage">
+        <p>Add this app to your home screen.</p>
+    </div>
+    <button onclick="closeBanner()">X</button>
+    <img src="/Asset 1right.png" alt="Middle Image" id="middleBannerImage" style="display: block; margin: 0 auto;">
 </div>
+
 
     <script src="app.js"></script>
 </body>
