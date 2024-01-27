@@ -69,7 +69,7 @@ function lookupOrder(orderNumber) {
 function displayOrderDetails(order) {
     const detailsDiv = document.getElementById('orderDetails');
     detailsDiv.innerHTML = `
-        <p><strong>Name:</strong> ${order.customerName}</p>
+        <p><strong>${order.customerName}</strong></p>
         <p><strong>✉️ Email:</strong> ${order.customerEmail}</p>
         <p><strong>🔢 Order:</strong> ${order.orderNumber}</p>
         <p><strong>${order.stage}</strong></p>
