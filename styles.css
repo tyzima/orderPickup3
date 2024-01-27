@@ -8,15 +8,14 @@ body {
     align-items: center;
 }
 
-.container {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    margin-top: 50px;
+.container svg {
+  display: block; /* Makes the SVG a block element */
+  margin-left: auto; /* With auto margins, */
+  margin-right: auto; /* the block element will be centered within its container */
+  width: 30%; /* Sets the width to 30% of the container */
+  height: auto; /* Maintains the aspect ratio of the SVG */
 }
+
 
 input[type="text"] {
     width: 100%;
