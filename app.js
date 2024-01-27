@@ -98,7 +98,6 @@ function displayOrderDetails(order) {
 }
 
 
-
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
         method: 'POST',
@@ -107,33 +106,25 @@ function updateOrderStage(orderNumber) {
     })
     .then(response => response.json())
     .then(data => {
+        // Instead of displaying order details, clear them
         const detailsDiv = document.getElementById('orderDetails');
-        detailsDiv.innerHTML = ''; // Clear the order details immediately
-        detailsDiv.style.display = 'none'; // Hide the detailsDiv
-        
-        // Assuming button is within the detailsDiv, it will be hidden by the above line.
-        // If not, use the following line to hide the button specifically.
-        // document.querySelector('.OrderDetailsbutton').style.display = 'none';
+        if (detailsDiv) {
+            detailsDiv.innerHTML = ''; // Clear the content
+        }
 
-        // Restart the barcode scanner for the next scan
-        initializeBarcodeScanner();
+        // Hide the button
+        const button = document.querySelector('.OrderDetailsbutton');
+        if (button) {
+            button.style.display = 'none';
+        }
+        
+        // Remove success class and add loading class to restart scanning
+        var svgElement = document.querySelector('#Layer_1');
+        svgElement.classList.remove('svg-success');
+        svgElement.classList.add('svg-loading');
+        initializeBarcodeScanner();  // Restart scanning after updating order status
     })
     .catch(error => {
         console.error('Error updating order stage:', error);
-    });
-}
-),
-        headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => response.json())
-    .then(data => {
-        displayOrderDetails({ ...data.order, stage: 'Picked Up' });
-        
-    // Remove success class and add loading class to restart scanning
-    var svgElement = document.querySelector('#Layer_1');
-    svgElement.classList.remove('svg-success');
-    svgElement.classList.add('svg-loading');
-    initializeBarcodeScanner();  // Restart scanning after updating order status
-    
     });
 }
