@@ -1,4 +1,3 @@
-document.querySelector('#Layer_1').classList.add('svg-loading');
 document.addEventListener('DOMContentLoaded', function() {
     initializeBarcodeScanner();
 });
@@ -33,6 +32,7 @@ function initializeBarcodeScanner() {
 
     
     // Add the loading class when starting the scan
+    document.querySelector('#Layer_1').classList.add('svg-loading');
     Quagga.onDetected(function(data) {
     
         let scannedBarcode = data.codeResult.code;
