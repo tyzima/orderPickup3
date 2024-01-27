@@ -72,7 +72,7 @@ function displayOrderDetails(order) {
         <p><strong>${order.customerName}</strong></p>
         <p><strong>✉️ Email:</strong> ${order.customerEmail}</p>
         <p><strong>🔢 Order:</strong> ${order.orderNumber}</p>
-        <p><strong>${order.stage}</strong></p>
+        <p class="stage-pill"><strong>${order.stage}</strong></p>
     `;
 
     // Check if the button already exists
