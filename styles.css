@@ -19,17 +19,29 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
     border-radius: 10px; /* Rounded corners */
     z-index: 1000;
+}
+
+#bannerContent {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#iosBanner img {
-    max-height: 50px; /* Adjust as needed */
+#leftBannerImage {
+  max-height: 40px;
+}
+
+#middleBannerImage {
+    max-height: 20px; /* Adjust as needed */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px; /* Adjust based on your exact needs */
 }
 
 #iosBanner p {
-    flex-grow: 2;
+    flex: 1;
+    text-align: center;
     margin: 0 10px; /* Add margin for spacing */
 }
 
@@ -37,6 +49,10 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em; /* Adjust size as needed */
+    color: #333; /* Adjust color as needed */
 }
 
 
