@@ -104,3 +104,50 @@ button:hover {
 #barcode-result {
     margin-top: 20px;
 }
+
+
+/* Video */
+#barcode-scanner video{
+ width:508px;
+ height:275px;
+}
+
+/* Barcode scanner */
+#barcode-scanner{
+ display:grid;
+ align-items:center;
+ justify-content:center;
+ flex-direction:row;
+ float:none;
+}
+
+@media (max-width:576px){
+
+ /* Barcode scanner */
+ #barcode-scanner{
+  height:149px;
+  transform:translatex(0px) translatey(0px);
+  margin-bottom:1px;
+ }
+ 
+ /* Container */
+ .container{
+  margin-top:0px;
+ }
+ 
+ /* Order details */
+ #orderDetails{
+  font-size:12px;
+ }
+ 
+ /* Heading */
+ .container h1{
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size:25px;
+ }
+ 
+ /* Barcode result */
+ #barcode-result{
+  font-size:10px;
+ }
+ 
