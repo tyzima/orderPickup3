@@ -91,3 +91,16 @@ button:hover {
  padding-right:0px;
  padding-left:0px;
 }
+
+
+#barcode-scanner {
+    width: 100%; /* Adjust the width to fit within the container */
+    height: 300px; /* Adjust the height as needed */
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden; /* Keeps the camera view within the bounds */
+}
+
+#barcode-result {
+    margin-top: 20px;
+}
