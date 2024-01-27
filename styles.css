@@ -61,6 +61,7 @@ body {
   width: 30%; /* Sets the width to 30% of the container */
   height: auto; /* Maintains the aspect ratio of the SVG */
   padding-top: 20px;
+  background-color: red;
 }
 
 
