@@ -14,6 +14,32 @@
   animation: none;
 }
 
+#orderDetails button{
+ display:inline;
+ height:50px;
+ background-image:linear-gradient(to right, #000428 0%, #004e92 100%);
+ font-weight:600;
+ font-size:16px;
+}
+
+.container #orderDetails button{
+ width:100% !important;
+}
+
+
+#orderDetails{
+ background-color:#ffffff;
+ border-top-left-radius:10px;
+ border-top-right-radius:10px;
+ border-bottom-left-radius:10px;
+ border-bottom-right-radius:10px;
+ box-shadow:0px 0px 16px 0px rgba(84,84,84,0.15) inset;
+ padding-top:18px;
+ padding-bottom:25px;
+ transform:translatex(0px) translatey(0px);
+ text-align:left;
+}
+
 /* Define gradient for the loading state */
 #loadingGradient {
   background: linear-gradient(270deg, #000080, #0000cd);
