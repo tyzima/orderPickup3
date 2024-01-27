@@ -76,15 +76,19 @@ function displayOrderDetails(order) {
     `;
 
     // Create the button element
-    const button = document.createElement('OrderDetailsbutton');
+    const button = document.createElement('button');
     button.textContent = 'Mark as Picked Up';
     button.onclick = function() {
         updateOrderStage(order.orderNumber);
     };
 
+    // Add the CSS class to the button
+    button.className = 'OrderDetailsbutton';
+
     // Append the button to the container div or another suitable element
     document.querySelector('.container').appendChild(button);
 }
+
 
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
