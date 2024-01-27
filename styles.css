@@ -10,9 +10,11 @@
     background-color: lightgrey;
     border-radius: 15px;
     padding: 5px 10px;
-    margin: 5px 5px;
+    margin: 5px 0 10px 0;  /* Increased bottom margin */
     text-align: center;
+    font-size: 0.9em;      /* Adjust the font size as needed */
 }
+
 
 
 .svg-loading .cls-1 {
