@@ -5,6 +5,16 @@
   100% { background-position: 0% 50%; }
 }
 
+.stage-pill {
+    display: inline-block;
+    background-color: lightgrey;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+
 .svg-loading .cls-1 {
   fill: url(#loadingGradient);
 }
