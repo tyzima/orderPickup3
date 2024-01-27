@@ -119,3 +119,16 @@ function displayOrderDetails(order) {
     // Rest of your existing code...
 }
 
+function updateOrderStage(orderNumber) {
+    fetch('/.netlify/functions/updateOrderStage', {
+        method: 'POST',
+        body: JSON.stringify({ orderNumber: orderNumber }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        displayOrderDetails({ ...data.order, stage: 'Picked Up' });
+        initializeBarcodeScanner();  // Restart scanning after updating order status
+    });
+}
+
