@@ -162,3 +162,26 @@ button:hover {
   font-size:10px;
  }
  
+
+/* SVG loading animation */
+@keyframes loadingGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.svg-loading .cls-1 {
+  fill: url(#loadingGradient);
+  animation: loadingGradient 2s linear infinite;
+}
+
+.svg-success .cls-1 {
+  fill: #90ee90; /* light green */
+  animation: none;
+}
+
+/* Define gradient for the loading state */
+#loadingGradient {
+  background: linear-gradient(270deg, #000080, #0000cd);
+  background-size: 200% 200%;
+}
