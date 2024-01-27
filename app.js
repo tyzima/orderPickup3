@@ -98,10 +98,31 @@ function displayOrderDetails(order) {
 }
 
 
+
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
         method: 'POST',
         body: JSON.stringify({ orderNumber: orderNumber }),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const detailsDiv = document.getElementById('orderDetails');
+        detailsDiv.innerHTML = ''; // Clear the order details immediately
+        detailsDiv.style.display = 'none'; // Hide the detailsDiv
+        
+        // Assuming button is within the detailsDiv, it will be hidden by the above line.
+        // If not, use the following line to hide the button specifically.
+        // document.querySelector('.OrderDetailsbutton').style.display = 'none';
+
+        // Restart the barcode scanner for the next scan
+        initializeBarcodeScanner();
+    })
+    .catch(error => {
+        console.error('Error updating order stage:', error);
+    });
+}
+),
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
