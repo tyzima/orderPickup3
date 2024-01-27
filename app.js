@@ -1,11 +1,30 @@
 
-document.getElementById('lookupButton').addEventListener('click', function() {
-    const orderNumber = document.getElementById('orderNumber').value;
-    if (!orderNumber) {
-        alert('Please enter an order number.');
-        return;
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector('#barcode-scanner')
+        },
+        decoder: {
+            readers: ["code_128_reader", "ean_reader", "ean_8_reader", "code_39_reader", "code_39_vin_reader", "codabar_reader", "upc_reader", "upc_e_reader", "i2of5_reader"]
+        }
+    }, function(err) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        Quagga.start();
+    });
 
+    Quagga.onDetected(function(data) {
+        let scannedBarcode = data.codeResult.code;
+        document.getElementById('scanned-barcode').textContent = scannedBarcode;
+        lookupOrder(scannedBarcode);
+    });
+});
+
+function lookupOrder(orderNumber) {
     fetch('/.netlify/functions/lookupOrder', {
         method: 'POST',
         body: JSON.stringify({ orderNumber: orderNumber }),
@@ -13,13 +32,9 @@ document.getElementById('lookupButton').addEventListener('click', function() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.error) {
-            alert('Error: ' + data.error);
-        } else {
-            displayOrderDetails(data);
-        }
+        displayOrderDetails(data);
     });
-});
+}
 
 function displayOrderDetails(order) {
     const detailsDiv = document.getElementById('orderDetails');
@@ -40,11 +55,7 @@ function updateOrderStage(orderNumber) {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            alert('Order stage updated successfully!');
-            displayOrderDetails({ ...data.order, stage: 'Picked Up' });
-        } else {
-            alert('Error updating order stage.');
-        }
+        displayOrderDetails({ ...data.order, stage: 'Picked Up' });
     });
 }
+
