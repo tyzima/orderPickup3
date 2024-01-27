@@ -85,3 +85,9 @@ button:hover {
  align-items:center;
  justify-content:center;
 }
+
+/* Order number */
+#orderNumber{
+ padding-right:0px;
+ padding-left:0px;
+}
