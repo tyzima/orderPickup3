@@ -4,13 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lax.Pickup</title>
+    <title>Order Lookup with Barcode Scanner</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Order Lookup</h1>
+        
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.82 8.28" style="width:30%; height:auto;">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M0,0h3.17v6.18h6.06v2.1H0V0Z"/>
+  <path class="cls-1" d="M14.16,0h4.75l4.57,8.28h-3.59l-.78-1.48h-5.53l-.78,1.48h-3.21L14.16,0ZM14.63,4.82h3.44l-1.71-3.27-1.73,3.27Z"/>
+  <path class="cls-1" d="M28.23,4.08L24.05,0h4.01l2.38,2.36,2.45-2.36h3.89l-4.39,3.98,4.59,4.29h-4.25l-2.55-2.52-2.43,2.52h-3.89l4.39-4.2Z"/>
+  <path class="cls-1" d="M37.87,5.78h2.87v2.49h-2.87v-2.49Z"/>
+  <path class="cls-1" d="M42.6,0h10.49l1.76,1.76v2.49l-1.76,1.76h-7.33v2.25h-3.17V0ZM51.21,4.1l.47-.47v-1.25l-.47-.47h-5.45v2.18h5.45Z"/>
+  <path class="cls-1" d="M55.94,6.42h2.49V1.86h-2.49V0h8.16v1.86h-2.5v4.56h2.5v1.86h-8.16v-1.86Z"/>
+  <path class="cls-1" d="M65.84,6.51V1.76l1.76-1.76h8.97l1.76,1.76v1.49h-3.17v-.74l-.59-.59h-4.87l-.71.71v3.02l.71.71h4.87l.59-.59v-.8h3.17v1.55l-1.76,1.76h-8.97l-1.76-1.76Z"/>
+  <path class="cls-1" d="M85.85,5.1l-2.35,1.76v1.42h-3.17V0h3.17v4.03l5.31-4.03h3.98l-4.57,3.38,4.83,4.89h-4.05l-3.15-3.18Z"/>
+  <path class="cls-1" d="M94.2,6.51V0h3.17v5.58l.71.71h4.33l.71-.71V0h3.17v6.51l-1.76,1.76h-8.55l-1.76-1.76Z"/>
+  <path class="cls-1" d="M108.56,0h10.49l1.76,1.76v2.49l-1.76,1.76h-7.33v2.25h-3.17V0ZM117.17,4.1l.47-.47v-1.25l-.47-.47h-5.45v2.18h5.45Z"/>
+</svg>
+ <!-- SVG added here -->
         <div id="barcode-scanner"></div>
         <div id="barcode-result">Scanned: <span id="scanned-barcode"></span></div>
         <div id="orderDetails"></div>
