@@ -174,7 +174,6 @@ function updateOrderStage(orderNumber) {
             initializeBarcodeScanner();  // This assumes your barcode scanner can be cleanly initialized again
         }, 2000); // 2000 ms delay for the button to disappear
         
-        displayOrderDetails({ ...data.order, stage: 'Picked Up' });
         
     // Remove success class and add loading class to restart scanning
     var svgElement = document.querySelector('#Layer_1');
