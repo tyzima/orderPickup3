@@ -32,7 +32,6 @@ function initializeBarcodeScanner() {
     });
 
     Quagga.onDetected(function(data) {
-        Quagga.stop();  // Stop scanning after a barcode is detected
         let scannedBarcode = data.codeResult.code;
         document.getElementById('scanned-barcode').textContent = scannedBarcode;
         lookupOrder(scannedBarcode);
@@ -47,7 +46,14 @@ function lookupOrder(orderNumber) {
     })
     .then(response => response.json())
     .then(data => {
-        displayOrderDetails(data);
+        if (data.orderNumber && data.orderNumber !== 'undefined') {
+            // Stop scanning only if a valid record is returned
+            Quagga.stop();
+            displayOrderDetails(data);
+        } else {
+            console.log("No valid record found for this barcode.");
+            // Optionally, display a message to the user or handle this case as needed
+        }
     });
 }
 
@@ -74,4 +80,3 @@ function updateOrderStage(orderNumber) {
         initializeBarcodeScanner();  // Restart scanning after updating order status
     });
 }
-
