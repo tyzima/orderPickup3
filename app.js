@@ -75,18 +75,26 @@ function displayOrderDetails(order) {
         <p><strong>${order.stage}</strong></p>
     `;
 
-    // Create the button element
-    const button = document.createElement('button');
-    button.textContent = 'Mark as Picked Up';
-    button.onclick = function() {
-        updateOrderStage(order.orderNumber);
-    };
+    // Check if the button already exists
+    let button = document.querySelector('.OrderDetailsbutton');
+    
+    // If the button does not exist, create and append it
+    if (!button) {
+        button = document.createElement('button');
+        button.textContent = 'Mark as Picked Up';
+        button.className = 'OrderDetailsbutton';
+        button.onclick = function() {
+            updateOrderStage(order.orderNumber);
+        };
 
-    // Add the CSS class to the button
-    button.className = 'OrderDetailsbutton';
-
-    // Append the button to the container div or another suitable element
-    document.querySelector('.container').appendChild(button);
+        // Append the button to the container div or another suitable element
+        document.querySelector('.container').appendChild(button);
+    } else {
+        // If the button already exists, update its onclick event with the new order number
+        button.onclick = function() {
+            updateOrderStage(order.orderNumber);
+        };
+    }
 }
 
 
