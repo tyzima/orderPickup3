@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     initializeBarcodeScanner();
 });
@@ -57,6 +56,7 @@ function lookupOrder(orderNumber) {
     });
 }
 
+
 function displayOrderDetails(order) {
     const detailsDiv = document.getElementById('orderDetails');
     detailsDiv.innerHTML = `
@@ -67,6 +67,7 @@ function displayOrderDetails(order) {
         <button onclick="updateOrderStage('${order.orderNumber}')">Picked Up</button>
     `;
 }
+
 
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
@@ -80,3 +81,41 @@ function updateOrderStage(orderNumber) {
         initializeBarcodeScanner();  // Restart scanning after updating order status
     });
 }
+
+
+function setStageDisplay(stage) {
+    var stageClass = '';
+    switch (stage) {
+        case 'Waiting to Send':
+            stageClass = 'stage-waiting';
+            break;
+        case 'Picked Up':
+            stageClass = 'stage-picked-up';
+            break;
+        case 'Sent Reminder 1/3':
+            stageClass = 'stage-reminder-1';
+            break;
+        case 'Sent Reminder 2/3':
+            stageClass = 'stage-reminder-2';
+            break;
+        case 'Sent Reminder 3/3':
+            stageClass = 'stage-reminder-3';
+            break;
+        default:
+            stageClass = 'stage-waiting'; // Default case if stage is unrecognized
+    }
+    return '<span class="stage-pill ' + stageClass + '">' + stage + '</span>';
+}
+
+/* Updated displayOrderDetails function */
+function displayOrderDetails(order) {
+    const detailsDiv = document.getElementById('orderDetails');
+    detailsDiv.innerHTML = `
+        <p><strong>Customer Name:</strong> ${order.customerName}</p>
+        <p><strong>Customer Email:</strong> ${order.customerEmail}</p>
+        <p><strong>Order Number:</strong> ${order.orderNumber}</p>
+        ${setStageDisplay(order.stage)}
+    `;
+    // Rest of your existing code...
+}
+
