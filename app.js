@@ -72,7 +72,7 @@ function displayOrderDetails(order) {
         <p><strong>🤝 Customer:</strong> ${order.customerName}</p>
         <p><strong>✉️ Email:</strong> ${order.customerEmail}</p>
         <p><strong>🔢 Order:</strong> ${order.orderNumber}</p>
-        <p><strong>Status:</strong> ${order.stage}</p>
+        <p><strong>${order.stage}</strong></p>
         <button onclick="updateOrderStage('${order.orderNumber}')">Mark as Picked Up</button>
     `;
 }
