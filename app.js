@@ -30,7 +30,11 @@ function initializeBarcodeScanner() {
         Quagga.start();
     });
 
+    
+    // Add the loading class when starting the scan
+    document.querySelector('#Layer_1').classList.add('svg-loading');
     Quagga.onDetected(function(data) {
+    
         let scannedBarcode = data.codeResult.code;
         document.getElementById('scanned-barcode').textContent = scannedBarcode;
         lookupOrder(scannedBarcode);
@@ -48,7 +52,13 @@ function lookupOrder(orderNumber) {
         if (data.orderNumber && data.orderNumber !== 'undefined') {
             // Stop scanning only if a valid record is returned
             Quagga.stop();
-            displayOrderDetails(data);
+            
+    // Remove loading class and add success class on successful scan
+    var svgElement = document.querySelector('#Layer_1');
+    svgElement.classList.remove('svg-loading');
+    svgElement.classList.add('svg-success');
+    displayOrderDetails(data);
+    
         } else {
             console.log("No valid record found for this barcode.");
             // Optionally, display a message to the user or handle this case as needed
@@ -66,8 +76,6 @@ function displayOrderDetails(order) {
         <button onclick="updateOrderStage('${order.orderNumber}')">Picked Up</button>
     `;
 }
-
-
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
         method: 'POST',
@@ -77,8 +85,12 @@ function updateOrderStage(orderNumber) {
     .then(response => response.json())
     .then(data => {
         displayOrderDetails({ ...data.order, stage: 'Picked Up' });
-        initializeBarcodeScanner();  // Restart scanning after updating order status
+        
+    // Remove success class and add loading class to restart scanning
+    var svgElement = document.querySelector('#Layer_1');
+    svgElement.classList.remove('svg-success');
+    svgElement.classList.add('svg-loading');
+    initializeBarcodeScanner();  // Restart scanning after updating order status
+    
     });
 }
-
-
