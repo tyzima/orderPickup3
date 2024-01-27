@@ -49,10 +49,14 @@
 }
 
 #middleBannerImage {
-    max-height: 50px; /* Adjust as needed */
+    max-height: 10px; /* Adjust as needed */
     /* Remove absolute positioning styles if you want it next to the text */
 }
 
+#leftBannerImage {
+    max-height: 30px; /* Adjust as needed */
+    /* Remove absolute positioning styles if you want it next to the text */
+}
 
 
 
