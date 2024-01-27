@@ -73,9 +73,19 @@ function displayOrderDetails(order) {
         <p><strong>✉️ Email:</strong> ${order.customerEmail}</p>
         <p><strong>🔢 Order:</strong> ${order.orderNumber}</p>
         <p><strong>${order.stage}</strong></p>
-        <button onclick="updateOrderStage('${order.orderNumber}')">Mark as Picked Up</button>
     `;
+
+    // Create the button element
+    const button = document.createElement('OrderDetailsbutton');
+    button.textContent = 'Mark as Picked Up';
+    button.onclick = function() {
+        updateOrderStage(order.orderNumber);
+    };
+
+    // Append the button to the container div or another suitable element
+    document.querySelector('.container').appendChild(button);
 }
+
 function updateOrderStage(orderNumber) {
     fetch('/.netlify/functions/updateOrderStage', {
         method: 'POST',
