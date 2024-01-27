@@ -7,7 +7,6 @@
 
 .svg-loading .cls-1 {
   fill: url(#loadingGradient);
-  animation: loadingGradient 2s linear infinite;
 }
 
 .svg-success .cls-1 {
