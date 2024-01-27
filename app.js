@@ -173,3 +173,23 @@ function updateOrderStage(orderNumber) {
         console.error('Error updating order stage:', error);
     });
 }
+
+
+function isIos() {
+    return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+
+function isInStandaloneMode() {
+    return ('standalone' in window.navigator) && (window.navigator.standalone);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (isIos() && !isInStandaloneMode()) {
+        document.getElementById('iosBanner').style.display = 'block';
+    }
+});
+
+function closeBanner() {
+    document.getElementById('iosBanner').style.display = 'none';
+}
+
