@@ -40,11 +40,11 @@
 
 #iosBanner button#closeBannerButton {
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 10px;
     background: none;
     border: none;
-    font-size: .75em; /* Adjust size as needed */
+    font-size: .95em; /* Adjust size as needed */
     color: white; /* Adjust color as needed */
 }
 
