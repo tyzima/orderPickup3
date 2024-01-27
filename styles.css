@@ -44,8 +44,8 @@
     right: 10px;
     background: none;
     border: none;
-    font-size: 1.5em; /* Adjust size as needed */
-    color: #333; /* Adjust color as needed */
+    font-size: .75em; /* Adjust size as needed */
+    color: white; /* Adjust color as needed */
 }
 
 #middleBannerImage {
