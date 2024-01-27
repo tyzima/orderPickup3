@@ -45,3 +45,43 @@ button:hover {
     border-radius: 5px;
     background-color: #e9ecef;
 }
+
+/* Order details */
+#orderDetails{
+ display:grid;
+ align-content:center;
+ justify-content:center;
+ transform:translatex(0px) translatey(0px);
+ float:none;
+ line-height:2.6px;
+ font-size:16px;
+}
+
+/* Paragraph */
+#orderDetails > p{
+ float:none;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+/* Lookup button */
+#lookupButton{
+ align-items:center;
+ justify-content:center;
+}
+
+/* Container */
+.container{
+ align-self:center;
+ display:grid;
+ flex:0 1 auto;
+ transform:translatex(0px) translatey(0px);
+}
+
+/* Heading */
+.container h1{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
