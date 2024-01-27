@@ -157,18 +157,21 @@ function updateOrderStage(orderNumber) {
  const button = document.querySelector('.OrderDetailsbutton');
         button.textContent = 'Success';
 
-        // Hide order details and show barcode scanner again after a short delay
+        // Clear order details immediately
+        const detailsDiv = document.getElementById('orderDetails');
+        detailsDiv.innerHTML = '';
+
+        // Delay the disappearance of the button and restart the barcode scanner
         setTimeout(() => {
-            const detailsDiv = document.getElementById('orderDetails');
-            detailsDiv.innerHTML = ''; // Clear order details
+            // Hide the button
+            button.style.display = 'none';
 
-            // Show the barcode scanner div and restart scanning
+            // Clear the SVG and show barcode scanner again
             const scannerDiv = document.querySelector('#barcode-scanner');
-            scannerDiv.innerHTML = ''; // Clear any existing SVG
+            scannerDiv.innerHTML = ''; // Clear any existing SVG or content
             initializeBarcodeScanner();  // Restart scanning after updating order status
+        }, 2000); // Delay for button disappearance in milliseconds
 
-            // Optionally, you can reset the button text or hide the button if needed
-        }, 2000); // Set delay as needed
         
         displayOrderDetails({ ...data.order, stage: 'Picked Up' });
         
