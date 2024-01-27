@@ -68,6 +68,8 @@ function lookupOrder(orderNumber) {
 
 function displayOrderDetails(order) {
     const detailsDiv = document.getElementById('orderDetails');
+    // Ensure the detailsDiv is shown again if it was previously hidden.
+    detailsDiv.style.display = 'block';
     detailsDiv.innerHTML = `
         <p><strong>${order.customerName}</strong></p>
         <p><strong>✉️ Email:</strong> ${order.customerEmail}</p>
@@ -90,12 +92,15 @@ function displayOrderDetails(order) {
         // Append the button to the container div or another suitable element
         document.querySelector('.container').appendChild(button);
     } else {
-        // If the button already exists, update its onclick event with the new order number
+        // Ensure the button is shown again if it was previously hidden.
+        button.style.display = 'inline-block'; // Or 'block', depending on your layout needs
+        // Update its onclick event with the new order number
         button.onclick = function() {
             updateOrderStage(order.orderNumber);
         };
     }
 }
+
 
 
 function updateOrderStage(orderNumber) {
