@@ -14,7 +14,7 @@
   animation: none;
 }
 
-#orderDetails button{
+.OrderDetailsbutton {
  display:inline;
  height:50px;
  background-image:linear-gradient(to right, #a2e79c 0%, #7acc71 100%);
