@@ -9,28 +9,30 @@ exports.handler = async (event, context) => {
     const { storecode } = JSON.parse(event.body);
 
     // Define OMG API endpoint and token
-    const OMG_ENDPOINT = `https://app.ordermygear.com/export/order_api/${storecode}`;
+    const BASE_OMG_ENDPOINT = `https://app.ordermygear.com/export/order_api/${storecode}`;
     const OMG_TOKEN = `Bearer ${process.env.OMG_BEARER_TOKEN}`;
-    
+
     // Function to fetch pages recursively
-    async function fetchOrders(page) {
-      const response = await axios.get(`${OMG_ENDPOINT}?limit=10&page=${page}`, {
+    async function fetchOrders(url) {
+      const response = await axios.get(url, {
         headers: { Authorization: OMG_TOKEN }
       });
-      
+
       const orders = response.data.exports.flatMap(store => store.orders.filter(order =>
         order.ship_to.method === 'PICK-UP AT LAX.COM' || order.ship_to.method === 'PICK-UP @ LAX.COM'
       ).map(order => order.order_id));
-      
+
       if (response.data.meta.paging.next) {
-        return orders.concat(await fetchOrders(page + 1));
+        // Recursively fetch the next page
+        return orders.concat(await fetchOrders(response.data.meta.paging.next));
       } else {
         return orders;
       }
     }
 
-    // Start fetching from page 1
-    const orderIds = await fetchOrders(1);
+    // Start fetching from the initial URL
+    const initialUrl = `${BASE_OMG_ENDPOINT}?limit=10&page=1`;
+    const orderIds = await fetchOrders(initialUrl);
 
     // Create a comma-separated string of order IDs
     const orderIdsString = orderIds.join(',');
