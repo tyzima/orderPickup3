@@ -1,5 +1,4 @@
 const axios = require('axios');
-const tqdm = require('tqdm');
 
 // Handler for Netlify Functions
 async function handler(event, context) {
@@ -30,13 +29,11 @@ async function processOrders(storeCode) {
     let currentPageUrl = `${apiEndpoint}?limit=40&page=1`;
     const allOrdersData = [];
     console.log("Processing orders...");
-    const pbar = new tqdm({ desc: "Pages processed", unit: "page" });
     while (currentPageUrl) {
         try {
             const [pageOrdersData, nextPageUrl] = await fetchOrders(baseOmgEndpoint, currentPageUrl, headers);
             allOrdersData.push(...pageOrdersData);
             currentPageUrl = nextPageUrl;
-            pbar.update(1);
         } catch (e) {
             console.error('Error processing orders:', e.message);
             break;
@@ -82,7 +79,6 @@ async function updateAirtable(ordersData) {
     };
     console.log("Updating Airtable...");
     const batchSize = 10; // Airtable allows up to 10 records per request
-    const pbar = new tqdm({ desc: "Batches processed" });
     for (let i = 0; i < ordersData.length; i += batchSize) {
         const batch = ordersData.slice(i, i + batchSize);
         const records = batch.map(order => ({
@@ -103,7 +99,6 @@ async function updateAirtable(ordersData) {
         if (response.status !== 200) {
             console.error(`Error in batch starting with order ID: ${batch[0].order_id} - Status: ${response.status}, Response: ${response.data}`);
         }
-        pbar.update(1);
     }
 }
 
