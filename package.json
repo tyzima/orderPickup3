@@ -12,6 +12,5 @@
   "dependencies": {
     "airtable": "^0.12.2",
     "axios": "^0.21.1",
-    "tqdm": "^3.0.0"
   }
 }
