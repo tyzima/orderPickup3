@@ -2,8 +2,8 @@ const axios = require('axios');
 
 // Handler for Netlify Functions
 async function handler(event, context) {
-    const body = JSON.parse(event.body);
-    const storeCode = body.store_code; // Store code passed via webhook payload
+  const body = JSON.parse(event.body);
+  const storeCode = body.store_code;
 
     // Process and update orders
     const ordersData = await processOrders(storeCode);
@@ -151,3 +151,11 @@ async function updateOrdersWithTag(orderIds, tagId) {
         }
     }
 }
+
+return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'Webhook processed successfully' }),
+  };
+}
+
+module.exports = { handler };
