@@ -5,20 +5,20 @@ async function handler(event, context) {
   const body = JSON.parse(event.body);
   const storeCode = body.store_code;
 
-    // Process and update orders
-    const ordersData = await processOrders(storeCode);
-    console.log(`Total orders processed: ${ordersData.length}`);
-    await updateAirtable(ordersData);
+  // Process and update orders
+  const ordersData = await processOrders(storeCode);
+  console.log(`Total orders processed: ${ordersData.length}`);
+  await updateAirtable(ordersData);
 
-    const orderNumbers = ordersData.map(order => order.order_id); // Extract order IDs for use in ShipStation
-    const tagId = 81744; // Specified tag ID
-    const orderIds = await getOrderIds(orderNumbers);
-    await updateOrdersWithTag(orderIds, tagId);
+  const orderNumbers = ordersData.map(order => order.order_id); // Extract order IDs for use in ShipStation
+  const tagId = 81744; // Specified tag ID
+  const orderIds = await getOrderIds(orderNumbers);
+  await updateOrdersWithTag(orderIds, tagId);
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "Script execution completed." })
-    };
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Script execution completed." })
+  };
 }
 
 async function processOrders(storeCode) {
@@ -152,10 +152,6 @@ async function updateOrdersWithTag(orderIds, tagId) {
     }
 }
 
-return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'Webhook processed successfully' }),
-  };
-}
+
 
 module.exports = { handler };
