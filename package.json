@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "airtable": "^0.12.2",
-     "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "axios-auth-client": "^1.0.0",
+    "tqdm": "^3.0.0"
   }
 }
