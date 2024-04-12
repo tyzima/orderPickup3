@@ -15,22 +15,28 @@ exports.handler = async (event, context) => {
 
     // Fetch orders from OMG
     const response = await axios.get(OMG_ENDPOINT, {
-      headers: { Authorization: OMG_TOKEN }
+      headers: {
+        Authorization: OMG_TOKEN
+      }
     });
 
-    // Filter for specific shipping methods
-    const orders = response.data.exports.flatMap(store => store.orders.filter(order =>
-      order.ship_to.method === 'PICK-UP AT LAX.COM' || order.ship_to.method === 'PICK-UP @ LAX.COM'
-    ));
+    // Filter for specific shipping methods and gather order IDs
+    const orderIDs = response.data.exports.flatMap(store => 
+      store.orders.filter(order => 
+        order.ship_to.method === 'PICK-UP AT LAX.COM' || order.ship_to.method === 'PICK-UP @ LAX.COM'
+      ).map(order => order.order_id)
+    );
 
-    // Check and update Airtable
-    for (const order of orders) {
-      const airtableRecord = await findAirtableRecord(order.order_id);
-      if (airtableRecord) {
-        await updateAirtable(airtableRecord.id, order);
-      } else {
-        await addToAirtable(order);
-      }
+    // If orderIDs array is not empty, send a webhook
+    if (orderIDs.length > 0) {
+      const webhookUrl = 'https://hooks.zapier.com/hooks/catch/53953/3n28yd5/'; // Replace with your actual webhook URL
+      await axios.post(webhookUrl, {
+        order_ids: orderIDs.join(', ')
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
     }
 
     return {
@@ -45,53 +51,3 @@ exports.handler = async (event, context) => {
     };
   }
 };
-
-
-// Find Airtable record by Order ID
-async function findAirtableRecord(orderId) {
-  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`;
-  const response = await axios.get(`${AIRTABLE_ENDPOINT}?filterByFormula={Order ID}='${orderId}'`, {
-    headers: {
-      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
-      'Content-Type': 'application/json'
-    }
-  });
-
-  return response.data.records[0] ? response.data.records[0] : null;
-}
-
-// Add a new order to Airtable
-async function addToAirtable(order) {
-  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`;
-  await axios.post(AIRTABLE_ENDPOINT, {
-    fields: {
-      "Order Number": order.order_id,
-      "Customer Name": order.customer.first_name + ' ' + order.customer.last_name,
-      "Tags": "PICK UP",
-      "Phone": order.customer.phone,
-      "Customer Email": order.customer.email,
-      "Store Name": order.name,
-      "24 Store ID": order.store_id
-    }
-  }, {
-    headers: {
-      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
-      'Content-Type': 'application/json'
-    }
-  });
-}
-
-// Update an existing order in Airtable to add the 'PICK UP' tag
-async function updateAirtable(recordId, order) {
-  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}/${recordId}`;
-  await axios.patch(AIRTABLE_ENDPOINT, {
-    fields: {
-      "Tags": "PICK UP"  
-    }
-  }, {
-    headers: {
-      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
-      'Content-Type': 'application/json'
-    }
-  });
-}
