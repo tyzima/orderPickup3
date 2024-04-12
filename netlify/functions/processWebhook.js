@@ -10,8 +10,8 @@ exports.handler = async (event, context) => {
     const { storecode } = JSON.parse(event.body);
 
     // Define OMG API endpoint
-    const OMG_ENDPOINT = `https://app.ordermygear.com/export/order_api/${storecode}`;
-    const OMG_TOKEN = 'Bearer YOUR_OMG_BEARER_TOKEN';
+const OMG_ENDPOINT = `https://app.ordermygear.com/export/order_api/${storecode}`;
+const OMG_TOKEN = `Bearer ${process.env.OMG_BEARER_TOKEN}`;
 
     // Fetch orders from OMG
     const response = await axios.get(OMG_ENDPOINT, {
@@ -50,10 +50,10 @@ exports.handler = async (event, context) => {
 
 // Find Airtable record by Order ID
 async function findAirtableRecord(orderId) {
-  const AIRTABLE_ENDPOINT = 'https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME';
+  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`;
   const response = await axios.get(`${AIRTABLE_ENDPOINT}?filterByFormula={Order ID}='${orderId}'`, {
     headers: {
-      Authorization: 'Bearer YOUR_AIRTABLE_API_KEY',
+      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
       'Content-Type': 'application/json'
     }
   });
@@ -63,7 +63,7 @@ async function findAirtableRecord(orderId) {
 
 // Add a new order to Airtable
 async function addToAirtable(order) {
-  const AIRTABLE_ENDPOINT = 'https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME';
+  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`;
   await axios.post(AIRTABLE_ENDPOINT, {
     fields: {
       "Order Number": order.order_id,
@@ -76,7 +76,7 @@ async function addToAirtable(order) {
     }
   }, {
     headers: {
-      Authorization: 'Bearer YOUR_AIRTABLE_API_KEY',
+      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
       'Content-Type': 'application/json'
     }
   });
@@ -84,14 +84,14 @@ async function addToAirtable(order) {
 
 // Update an existing order in Airtable to add the 'PICK UP' tag
 async function updateAirtable(recordId, order) {
-  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME/${recordId}`;
+  const AIRTABLE_ENDPOINT = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}/${recordId}`;
   await axios.patch(AIRTABLE_ENDPOINT, {
     fields: {
       "Tags": "PICK UP"  
     }
   }, {
     headers: {
-      Authorization: 'Bearer YOUR_AIRTABLE_API_KEY',
+      Authorization: 'Bearer ${process.env.AIRTABLE_API_KEY}',
       'Content-Type': 'application/json'
     }
   });
