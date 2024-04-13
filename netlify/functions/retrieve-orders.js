@@ -23,9 +23,10 @@ exports.handler = async function(event, context) {
     }
 
     // Function to send data to the Airtable function
-    async function sendToAirtable(data) {
-        await axios.post('/.netlify/functions/update-airtable', data);
-    }
+   async function sendToAirtable(data) {
+    const netlifySiteUrl = process.env.NETLIFY_SITE_URL; // Make sure this is set in your Netlify environment variables
+    await axios.post(`${netlifySiteUrl}/.netlify/functions/update-airtable`, data);
+}
 
     try {
         await fetchOrders();
