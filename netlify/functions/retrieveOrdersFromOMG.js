@@ -1,8 +1,9 @@
 const axios = require('axios');
 
-async function retrieveOrdersFromOMG(event, context) {
+async function handler(event, context) {
   const body = JSON.parse(event.body);
   const storeCode = body.store_code;
+  console.log(`Received store code: ${storeCode}`);
 
   const ordersData = await processOrders(storeCode);
   console.log(`Total orders processed: ${ordersData.length}`);
@@ -60,4 +61,4 @@ async function fetchOrders(baseUrl, url, headers) {
   return [ordersData, nextPageUrl];
 }
 
-module.exports = { retrieveOrdersFromOMG };
+module.exports = { handler };
