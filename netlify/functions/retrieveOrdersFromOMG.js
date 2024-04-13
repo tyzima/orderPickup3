@@ -19,7 +19,7 @@ async function processOrders(storeCode) {
   const apiEndpoint = `/export/order_api/${storeCode}`;
   const omgToken = `Bearer ${process.env.OMG_API_TOKEN}`;
   const headers = { 'Authorization': omgToken };
-  let currentPageUrl = `${apiEndpoint}?limit=10&page=1`;
+  let currentPageUrl = `${apiEndpoint}?limit=5&page=1`;
   const allOrdersData = [];
   console.log("Processing orders...");
   while (currentPageUrl) {
