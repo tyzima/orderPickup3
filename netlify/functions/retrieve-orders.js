@@ -8,7 +8,7 @@ exports.handler = async function(event, context) {
         const limit = 5;
         const response = await axios.get(`https://app.ordermygear.com/export/order_api/${storeCode}?limit=${limit}&page=${page}`, {
             headers: {
-                'Authorization': 'Bearer OMG_API_TOKEN'
+                'Authorization': `Bearer ${process.env.OMG_API_TOKEN}`
             }
         });
         const data = response.data;
